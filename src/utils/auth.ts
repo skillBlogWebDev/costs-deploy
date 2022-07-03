@@ -32,4 +32,4 @@ export const setAuthDataToLS = (data: string) => {
 export const handleAlertMessage = (alert: IAlert) => {
     setAlert(alert);
     setTimeout(() => setAlert({ alertText: '', alertStatus: '' }), 3000);
-} 
+}

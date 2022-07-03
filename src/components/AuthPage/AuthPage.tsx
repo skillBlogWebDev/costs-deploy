@@ -12,7 +12,11 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
     const currentAuthTitle = type === 'login' ? 'Войти' : 'Регистрация';
     const navigate = useNavigate();
 
-    const handleAuthResponse = (result: boolean | undefined, path: string, alertText: string) => {
+    const handleAuthResponse = (
+        result: boolean | undefined,
+        navigatePath: string,
+        alertText: string
+    ) => {
         if (!result) {
             setSpinner(false);
             return;
@@ -22,7 +26,7 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
         passwordInput.current.value = '';
 
         setSpinner(false);
-        navigate(path);
+        navigate(navigatePath);
         handleAlertMessage({ alertText, alertStatus: 'success' });
     }
 
@@ -32,6 +36,7 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
             handleAlertMessage({ alertText: 'Заполните все поля!', alertStatus: 'warning' });
             return;
         }
+
         const result = await AuthClient.login(username, password);
 
         handleAuthResponse(result, '/costs', 'Вход выполнен!');
@@ -41,14 +46,18 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
         if (!username || !password) {
             setSpinner(false);
             handleAlertMessage({ alertText: 'Заполните все поля!', alertStatus: 'warning' });
-        } else if (password.length < 4) {
+            return;
+        }
+
+        if (password.length < 4) {
             setSpinner(false);
             handleAlertMessage({ alertText: 'Пароль должен содеражать больше 4 смволов!', alertStatus: 'warning' });
-        } else {
-            const result = await AuthClient.registration(username, password);
-
-            handleAuthResponse(result, '/login', 'Регистрация выполнена!');
+            return;
         }
+
+        const result = await AuthClient.registration(username, password);
+
+        handleAuthResponse(result, '/login', 'Регистрация выполнена!');
     }
 
     const authUser = (event: React.FormEvent<HTMLFormElement>) => {
