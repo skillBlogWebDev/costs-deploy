@@ -50,6 +50,7 @@ export const CostItem = ({ cost, deleteItem, index }: ICostItemProps) => {
             textInput,
             dateInput,
         )) {
+            setEditSpinner(false);
             return
         }
                 

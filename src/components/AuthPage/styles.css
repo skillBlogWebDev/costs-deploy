@@ -1,11 +1,16 @@
-.login__label {
+.auth__label {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-.login-btn {
+.auth-btn {
     position: relative;
     min-width: 70px;
     min-height: 38px;
+}
+
+.question__text {
+    display: inline-block;
+    margin-right: 7px;
 }
