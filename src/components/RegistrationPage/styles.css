@@ -1,0 +1,72 @@
+.registration {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: lightblue;
+    padding: 20px;
+}
+
+.registration__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.registration__label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.registration__label:nth-child(2) {
+    margin-bottom: 25px;
+}
+
+.label__text {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.registration__input {
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+.registration__btn {
+    border: none;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: black;
+    color: white;
+    transition: color .3s ease-in-out, background-color .3s ease-in-out;
+}
+
+.registration__btn:hover {
+    transition: color .3s ease-in-out, background-color .3s ease-in-out;
+    opacity: 0.8;
+}
+
+.question__text {
+    display: inline-block;
+    margin-right: 7px;
+}
+
+.error-block {
+    color: red;
+    position: absolute;
+    bottom: 93px;
+    left: 45px;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 35px;
+}

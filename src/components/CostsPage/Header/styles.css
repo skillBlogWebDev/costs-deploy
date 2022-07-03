@@ -1,0 +1,34 @@
+.error-message {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    color: red;
+}
+
+.add-btn {
+    position: relative;
+    min-width: 96px;
+    height: 38px;
+} 
+
+form {
+    position: relative;
+    align-items: flex-end;
+}
+
+.form-item {
+    margin-right: 10px;
+}
+
+@media (max-width: 575px) {
+    form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-item {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
