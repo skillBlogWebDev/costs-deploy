@@ -22,7 +22,7 @@ export class AuthClient {
 
     static async registration(username: string, password: string) {
         try {
-            const result = await api.post('/auth/registration', { username, password });
+            const result = await api.post('https://protected-beach-61085.herokuapp.com/auth/registration', { username, password });
             
             if (result.status === 201) {
                 setAuth(false);

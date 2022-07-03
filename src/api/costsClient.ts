@@ -6,7 +6,7 @@ import { getAuthDataFromLS, setAuthDataToLS, removeUser } from '../utils/auth';
 
 export const createCostFx = createEffect(async ({ url, cost, token }: ICreateCostFx) => {
     try {
-        const { data } = await api.post(url, { ...cost }, { headers: { 'Authorization': `Bearer ${token}` } });        
+        const { data } = await api.post(`https://protected-beach-61085.herokuapp.com${url}`, { ...cost }, { headers: { 'Authorization': `Bearer ${token}` } });        
         
         return data;
     } catch (error) {
@@ -16,7 +16,7 @@ export const createCostFx = createEffect(async ({ url, cost, token }: ICreateCos
 
 export const getCostsFx = createEffect(async ({ url, token }: IGetCostsFx) => {
     try {
-        const { data } = await api.get(url, { headers: { 'Authorization': `Bearer ${token}` } });
+        const { data } = await api.get(`https://protected-beach-61085.herokuapp.com${url}`, { headers: { 'Authorization': `Bearer ${token}` } });
 
         return data;
     } catch (error) {
@@ -26,7 +26,7 @@ export const getCostsFx = createEffect(async ({ url, token }: IGetCostsFx) => {
 
 export const updateCostsFx = createEffect(async ({ url, token, cost, id }: IUpdateCostsFx) => {
     try {
-        const { data } = await api.patch(`${url}/${id}`, { ...cost }, { headers: { 'Authorization': `Bearer ${token}` } });        
+        const { data } = await api.patch(`https://protected-beach-61085.herokuapp.com${url}/${id}`, { ...cost }, { headers: { 'Authorization': `Bearer ${token}` } });        
 
         return data;
     } catch (error) {        
@@ -36,7 +36,7 @@ export const updateCostsFx = createEffect(async ({ url, token, cost, id }: IUpda
 
 export const deleteCostsFx = createEffect(async ({ url, token, id }: IDeleteCostsFx) => {
     try {
-        await api.delete(`${url}/${id}`, { headers: { 'Authorization': `Bearer ${token}` }});
+        await api.delete(`https://protected-beach-61085.herokuapp.com${url}/${id}`, { headers: { 'Authorization': `Bearer ${token}` }});
     } catch (error) {
         handleAxiosError(error, { type: 'delete', deleteCost: { url, id } });
     }
