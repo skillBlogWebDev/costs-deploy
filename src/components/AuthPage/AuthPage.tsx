@@ -12,6 +12,20 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
     const currentAuthTitle = type === 'login' ? 'Войти' : 'Регистрация';
     const navigate = useNavigate();
 
+    const handleAuthResponse = (result: boolean | undefined, path: string, alertText: string) => {
+        if (!result) {
+            setSpinner(false);
+            return;
+        }
+
+        usernameInput.current.value = '';
+        passwordInput.current.value = '';
+
+        setSpinner(false);
+        navigate(path);
+        handleAlertMessage({ alertText, alertStatus: 'success' });
+    }
+
     const loginUser = async (username: string, password: string) => {
         if (!username || !password) {
             setSpinner(false);
@@ -20,16 +34,7 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
         }
         const result = await AuthClient.login(username, password);
 
-        if (!result) {
-            setSpinner(false);
-            return;
-        } else {            
-            usernameInput.current.value = '';
-            passwordInput.current.value = '';
-
-            navigate('/costs');
-            handleAlertMessage({ alertText: 'Вход выполнен!', alertStatus: 'success' });
-        }
+        handleAuthResponse(result, '/costs', 'Вход выполнен!');
     }
 
     const createUser = async (username: string, password: string) => {
@@ -42,15 +47,7 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
         } else {
             const result = await AuthClient.registration(username, password);
 
-            if (!result) {
-                setSpinner(false);
-                return;
-            }
-
-            usernameInput.current.value = '';
-            passwordInput.current.value = '';
-            navigate('/login');
-            handleAlertMessage({ alertText: 'Регистрация выполнена!', alertStatus: 'success' });
+            handleAuthResponse(result, '/login', 'Регистрация выполнена!');
         }
     }
 
