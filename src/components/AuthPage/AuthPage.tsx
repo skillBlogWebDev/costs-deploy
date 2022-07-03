@@ -14,6 +14,7 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
 
     const loginUser = async (username: string, password: string) => {
         if (!username || !password) {
+            setSpinner(false);
             handleAlertMessage({ alertText: 'Заполните все поля!', alertStatus: 'warning' });
             return;
         }
@@ -33,8 +34,10 @@ export const AuthPage = ({ type }: { type: 'registration' | 'login'; }) => {
 
     const createUser = async (username: string, password: string) => {
         if (!username || !password) {
+            setSpinner(false);
             handleAlertMessage({ alertText: 'Заполните все поля!', alertStatus: 'warning' });
         } else if (password.length < 4) {
+            setSpinner(false);
             handleAlertMessage({ alertText: 'Пароль должен содеражать больше 4 смволов!', alertStatus: 'warning' });
         } else {
             const result = await AuthClient.registration(username, password);
