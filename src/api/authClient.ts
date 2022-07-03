@@ -5,7 +5,7 @@ import { handleAxiosError } from "../utils/errors";
 export class AuthClient {
     static async login(username: string, password: string) {
         try {
-            const result = await api.post('/auth/login', { username, password });
+            const result = await api.post('https://protected-beach-61085.herokuapp.com/auth/login', { username, password });
 
             if (result.status === 200) {
                 setAuth(true);
