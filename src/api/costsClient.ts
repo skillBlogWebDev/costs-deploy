@@ -44,7 +44,7 @@ export const deleteCostsFx = createEffect(async ({ url, token, id }: IDeleteCost
 
 export const refreshTokenFx = createEffect(async ({ url, token, username }: IRefreshTokenFx) => {
     try {
-        const result = await api.post(url, { refresh_token: token, username });
+        const result = await api.post(`https://protected-beach-61085.herokuapp.com${url}`, { refresh_token: token, username });
 
         if (result.status === 200) {
             const authData = getAuthDataFromLS();
