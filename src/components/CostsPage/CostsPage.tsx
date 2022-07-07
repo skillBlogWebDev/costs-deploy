@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "effector-react";
 import { CostsList } from "./CostsList/CostsList";
 import { $costs, setCosts } from '../../context/index'
@@ -10,10 +10,14 @@ import { Spinner } from "../Spinner/Spinner";
 export const CostsPage = () => {
     const store = useStore($costs);
     const [spinner, setSpinner] = useState(false);
+    const shouldLoadCosts = useRef(true);
 
-    useEffect(() => {
-        handleGetCosts();
-    }, []);
+    useEffect(() => {        
+        if (shouldLoadCosts.current) {
+            shouldLoadCosts.current = false
+            handleGetCosts();
+        }
+    }, []);    
 
     const handleGetCosts = async () => {
         setSpinner(true);
